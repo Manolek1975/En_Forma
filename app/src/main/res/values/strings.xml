@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">En Forma</string>
+    <string name="exercise">Ejercicios</string>
+    <string name="resume">Resumen</string>
+    <string name="settings">Opciones</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="footing">Footing</string>
+    <string name="gym">Gimnasia</string>
+    <string name="weight">Pesas</string>
+    <string name="bicycle">Bicicleta</string>
+    <string name="back">Back</string>
+    <string name="start">Inicio</string>
+    <string name="end">Final</string>
+    <string name="message_duration">Has practicado %1$s durante %2$d minutos</string>
+
+</resources>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/exerciseFragment">
+
+    <fragment
+        android:id="@+id/exerciseFragment"
+        android:name="com.delek.enforma.ui.ExerciseFragment"
+        android:label="fragment_exercise"
+        tools:layout="@layout/fragment_exercise" >
+        <action
+            android:id="@+id/action_exerciseFragment_to_formFragment"
+            app:destination="@id/formFragment" />
+        <argument
+            android:name="type"
+            app:argType="string" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/resumeFragment"
+        android:name="com.delek.enforma.ui.ResumeFragment"
+        android:label="fragment_resume"
+        tools:layout="@layout/fragment_resume" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.delek.enforma.ui.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/formFragment"
+        android:name="com.delek.enforma.ui.FormFragment"
+        android:label="fragment_form"
+        tools:layout="@layout/fragment_form" >
+        <argument
+            android:name="type"
+            app:argType="string" />
+    </fragment>
+</navigation>
