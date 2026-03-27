@@ -4,8 +4,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00000000</color>
 
-    <color name="primary">#CC9823</color>
-    <color name="primaryDark">#A24A11</color>
+    <color name="primary">#EAB230</color>
+    <color name="primaryDark">#743B15</color>
     <color name="secondary">#3B57D9</color>
     <color name="accent">#74DCCC</color>
 

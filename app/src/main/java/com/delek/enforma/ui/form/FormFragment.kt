@@ -1,4 +1,4 @@
-package com.delek.enforma.ui
+package com.delek.enforma.ui.form
 
 import android.graphics.Color
 import android.os.Bundle
@@ -10,10 +10,12 @@ import androidx.navigation.fragment.navArgs
 import com.delek.enforma.R
 import com.delek.enforma.databinding.FragmentFormBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
+@AndroidEntryPoint
 class FormFragment : Fragment() {
 
     val args by navArgs<FormFragmentArgs>()

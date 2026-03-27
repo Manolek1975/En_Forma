@@ -1,6 +1,5 @@
-package com.delek.enforma.ui
+package com.delek.enforma.ui.home
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +8,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.delek.enforma.R
 import com.delek.enforma.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -19,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        window.setNavigationBarColor(Color.BLACK)
+        //window.setNavigationBarColor(Color.BLACK)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         navigation()

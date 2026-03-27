@@ -4,10 +4,10 @@
     <string name="resume">Resumen</string>
     <string name="settings">Opciones</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="footing">Footing</string>
-    <string name="gym">Gimnasia</string>
-    <string name="weight">Pesas</string>
-    <string name="bicycle">Bicicleta</string>
+    <string name="ex_footing">Footing</string>
+    <string name="ex_gym">Gimnasia</string>
+    <string name="ex_weight">Pesas</string>
+    <string name="ex_bicycle">Bicicleta</string>
     <string name="back">Back</string>
     <string name="start">Inicio</string>
     <string name="end">Final</string>

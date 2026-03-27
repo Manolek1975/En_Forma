@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/primary"
     android:padding="20dp"
-    tools:context=".ui.ExerciseFragment">
+    tools:context=".ui.exercise.ExerciseFragment">
 
 <androidx.appcompat.widget.AppCompatTextView
     android:id="@+id/tv_title"
@@ -23,7 +23,7 @@
     android:layout_height="wrap_content"
     android:background="@android:color/transparent"
     android:src="@drawable/icon_footing"
-    android:contentDescription="@string/footing"
+    android:contentDescription="@string/ex_footing"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/tv_title" />
@@ -34,7 +34,7 @@
     android:layout_height="wrap_content"
     android:background="@android:color/transparent"
     android:src="@drawable/icon_gym"
-    android:contentDescription="@string/gym"
+    android:contentDescription="@string/ex_gym"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/ib_footing" />
 
@@ -44,7 +44,7 @@
     android:layout_height="wrap_content"
     android:background="@android:color/transparent"
     android:src="@drawable/icon_weights"
-    android:contentDescription="@string/weight"
+    android:contentDescription="@string/ex_weight"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toBottomOf="@id/ib_footing" />
 
@@ -54,7 +54,7 @@
     android:layout_height="wrap_content"
     android:background="@android:color/transparent"
     android:src="@drawable/icon_bicycle"
-    android:contentDescription="@string/bicycle"
+    android:contentDescription="@string/ex_bicycle"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/ib_gym" />

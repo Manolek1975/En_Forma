@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="name_exercise">
+        <item>Footing</item>
+        <item>Gym</item>
+        <item>Weight</item>
+        <item>Bicycle</item>
+    </string-array>
+
+    <string-array name="image_exercise">
+        <item>icon_footing</item>
+        <item>icon_gym</item>
+        <item>icon_weight</item>
+        <item>icon_bicycle</item>
+    </string-array>
+
+</resources>
