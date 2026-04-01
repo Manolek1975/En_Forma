@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ExerciseFragment : Fragment() {
 
-    private val  exerciseViewModel by viewModels<ExerciseViewModel>()
+    private val exerciseViewModel by viewModels<ExerciseViewModel>()
     private var _binding: FragmentExerciseBinding? = null
     private val binding get() = _binding!!
 
@@ -31,7 +31,6 @@ class ExerciseFragment : Fragment() {
     fun initUI() {
         setMenuVisible()
         navigation()
-
     }
 
     private fun setMenuVisible() {
@@ -40,25 +39,24 @@ class ExerciseFragment : Fragment() {
     }
 
     private fun navigation() {
-
         binding.ibFooting.setOnClickListener {
             findNavController().navigate(
-                ExerciseFragmentDirections.Companion.actionExerciseFragmentToFormFragment("Footing")
+                ExerciseFragmentDirections.actionExerciseFragmentToFormFragment("Footing")
             )
         }
         binding.ibGym.setOnClickListener {
             findNavController().navigate(
-                ExerciseFragmentDirections.Companion.actionExerciseFragmentToFormFragment("Gym")
+                ExerciseFragmentDirections.actionExerciseFragmentToFormFragment("Gym")
             )
         }
         binding.ibWeight.setOnClickListener {
             findNavController().navigate(
-                ExerciseFragmentDirections.Companion.actionExerciseFragmentToFormFragment("Weight")
+                ExerciseFragmentDirections.actionExerciseFragmentToFormFragment("Weight")
             )
         }
         binding.ibBicycle.setOnClickListener {
             findNavController().navigate(
-                ExerciseFragmentDirections.Companion.actionExerciseFragmentToFormFragment("Bicycle")
+                ExerciseFragmentDirections.actionExerciseFragmentToFormFragment("Bicycle")
             )
         }
     }

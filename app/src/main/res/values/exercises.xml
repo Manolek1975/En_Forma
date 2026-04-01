@@ -5,6 +5,10 @@
         <item>Gym</item>
         <item>Weight</item>
         <item>Bicycle</item>
+        <item>Walking</item>
+        <item>Handgrip</item>
+        <item>Sports</item>
+        <item>Strength</item>
     </string-array>
 
     <string-array name="image_exercise">
@@ -12,6 +16,10 @@
         <item>icon_gym</item>
         <item>icon_weight</item>
         <item>icon_bicycle</item>
+        <item>icon_walk</item>
+        <item>icon_handgrip</item>
+        <item>icon_sports</item>
+        <item>icon_strength</item>
     </string-array>
 
 </resources>

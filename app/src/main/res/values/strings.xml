@@ -3,7 +3,8 @@
     <string name="exercise">Ejercicios</string>
     <string name="resume">Resumen</string>
     <string name="settings">Opciones</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="touch_the_screen">Touch the screen</string>
+    <!-- EXERCISE FRAGMENT -->
     <string name="ex_footing">Footing</string>
     <string name="ex_gym">Gimnasia</string>
     <string name="ex_weight">Pesas</string>
@@ -12,5 +13,6 @@
     <string name="start">Inicio</string>
     <string name="end">Final</string>
     <string name="message_duration">Has practicado %1$s durante %2$d minutos</string>
+
 
 </resources>

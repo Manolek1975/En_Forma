@@ -1,4 +1,4 @@
-package com.delek.enforma.ui.home
+package com.delek.enforma.ui.main
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
