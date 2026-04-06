@@ -40,7 +40,7 @@
         tools:layout="@layout/fragment_form" >
         <argument
             android:name="type"
-            app:argType="string" />
+            app:argType="integer" />
     </fragment>
 
 </navigation>

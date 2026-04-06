@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.delek.enforma.R
 import com.delek.enforma.databinding.FragmentFormBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.reflect.Field
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -19,6 +21,7 @@ import java.time.format.DateTimeFormatter
 class FormFragment : Fragment() {
 
     val args by navArgs<FormFragmentArgs>()
+    private val viewModel: FormViewModel by viewModels()
     private var _binding: FragmentFormBinding? = null
     private val binding get() = _binding!!
 
@@ -40,12 +43,11 @@ class FormFragment : Fragment() {
     private fun setUI() {
         var startTime: LocalDateTime? = null
 
-        binding.tvTitle.text = args.type
-        when (args.type) {
-            "Footing" -> binding.ivExercise.setImageResource(R.drawable.icon_footing)
-            "Gym" -> binding.ivExercise.setImageResource(R.drawable.icon_gym)
-            "Weight" -> binding.ivExercise.setImageResource(R.drawable.icon_weight)
-            "Bicycle" -> binding.ivExercise.setImageResource(R.drawable.icon_bicycle)
+        viewModel.getExerciseById(args.type)
+        viewModel.exercise.observe(viewLifecycleOwner){
+            val id = getResId(it.image, R.drawable::class.java)
+            binding.ivExercise.setImageResource(id)
+            binding.tvTitle.text = it.name
         }
         binding.arrowBack.setOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
@@ -78,6 +80,16 @@ class FormFragment : Fragment() {
     private fun hideMenu() {
         val view = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav_view)
         view.visibility = View.GONE
+    }
+
+    fun getResId(resName: String?, c: Class<*>): Int {
+        try {
+            val idField: Field = c.getDeclaredField(resName!!)
+            return idField.getInt(idField)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return -1
+        }
     }
 
 }

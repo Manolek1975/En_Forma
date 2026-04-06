@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.delek.enforma.R
 import com.delek.enforma.domain.model.Exercise
 
-class ExerciseAdapter (private var exerciseList: List<Exercise> = emptyList())
+class ExerciseAdapter (
+    private var exerciseList: List<Exercise> = emptyList(),
+    private val onItemSelected: (Exercise) -> Unit)
     : RecyclerView.Adapter<ExerciseViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewHolder {
@@ -17,7 +19,7 @@ class ExerciseAdapter (private var exerciseList: List<Exercise> = emptyList())
     }
 
     override fun onBindViewHolder(holder: ExerciseViewHolder, position: Int) {
-        holder.render(exerciseList[position])
+        holder.render(exerciseList[position], onItemSelected)
     }
 
     override fun getItemCount() = exerciseList.size

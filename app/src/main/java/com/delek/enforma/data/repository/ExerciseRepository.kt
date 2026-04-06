@@ -16,5 +16,10 @@ class ExerciseRepository @Inject constructor(val exerciseDao: ExerciseDao) {
         val response: List<ExerciseEntity> = exerciseDao.getAll()
         return response.map { it.toDomain() }
     }
+
+    suspend fun getExerciseById(id: Int): Exercise {
+        val response: ExerciseEntity = exerciseDao.getExerciseById(id)
+        return response.toDomain()
+    }
 }
 

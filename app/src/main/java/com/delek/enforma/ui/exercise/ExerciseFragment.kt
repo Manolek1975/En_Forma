@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.delek.enforma.R
 import com.delek.enforma.databinding.FragmentExerciseBinding
@@ -45,8 +46,11 @@ class ExerciseFragment : Fragment() {
     }
 
     private fun navigation() {
-
-        adapter = ExerciseAdapter()
+        adapter = ExerciseAdapter(onItemSelected = {
+            findNavController().navigate(
+                ExerciseFragmentDirections.actionExerciseFragmentToFormFragment(it.id)
+            )
+        })
         binding.rvExercises.layoutManager = GridLayoutManager(context, 2)
         binding.rvExercises.adapter = adapter
 

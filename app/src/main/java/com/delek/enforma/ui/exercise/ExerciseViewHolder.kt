@@ -11,11 +11,18 @@ class ExerciseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val binding = ItemExerciseBinding.bind(view)
 
-    fun render(exercise: Exercise) {
+    fun render(exercise: Exercise, onItemSelected: (Exercise) -> Unit) {
         val id = getResId(exercise.image, R.drawable::class.java)
         binding.itemImage.setImageResource(id)
         binding.itemText.text = exercise.name
 
+        binding.itemImage.setOnClickListener {
+            selectItem(binding.itemImage, goExercise = {onItemSelected(exercise)})
+        }
+    }
+
+    fun selectItem (view: View, goExercise: () -> Unit){
+        goExercise()
     }
 
     fun getResId(resName: String?, c: Class<*>): Int {
