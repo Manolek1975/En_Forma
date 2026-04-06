@@ -1,8 +1,8 @@
 package com.delek.enforma.data.repository
 
 import android.content.Context
-import com.delek.enforma.data.entity.ExerciseEntity
 import com.delek.enforma.data.provider.ExerciseProvider
+import com.delek.enforma.domain.model.Exercise
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
@@ -11,7 +11,7 @@ class ExerciseUseCase @Inject constructor(
     private val exerciseRepository: ExerciseRepository
 ) {
 
-    suspend operator fun invoke(): List<ExerciseEntity> {
+    suspend operator fun invoke(): List<Exercise> {
         val exercises = exerciseRepository.getAll()
         return if (exercises.isEmpty()) {
             exerciseRepository.insertExercises(ExerciseProvider.loadExercises(context))

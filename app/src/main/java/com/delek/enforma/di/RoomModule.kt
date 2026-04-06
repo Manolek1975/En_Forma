@@ -1,4 +1,4 @@
-package com.delek.enforma.domain
+package com.delek.enforma.di
 
 import android.content.Context
 import androidx.room.Room
@@ -21,5 +21,8 @@ object RoomModule {
     fun provideRoom(@ApplicationContext context: Context) =
         Room.databaseBuilder(context, ExerciseDatabase::class.java, DATABASE_NAME).build()
 
+    @Singleton
+    @Provides
+    fun provideExerciseDao(db: ExerciseDatabase) = db.getExerciseDao()
 
 }

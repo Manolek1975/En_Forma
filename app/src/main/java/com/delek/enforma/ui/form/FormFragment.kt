@@ -44,7 +44,7 @@ class FormFragment : Fragment() {
         when (args.type) {
             "Footing" -> binding.ivExercise.setImageResource(R.drawable.icon_footing)
             "Gym" -> binding.ivExercise.setImageResource(R.drawable.icon_gym)
-            "Weight" -> binding.ivExercise.setImageResource(R.drawable.icon_weights)
+            "Weight" -> binding.ivExercise.setImageResource(R.drawable.icon_weight)
             "Bicycle" -> binding.ivExercise.setImageResource(R.drawable.icon_bicycle)
         }
         binding.arrowBack.setOnClickListener {

@@ -6,18 +6,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.GridLayoutManager
 import com.delek.enforma.R
 import com.delek.enforma.databinding.FragmentExerciseBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ExerciseFragment : Fragment() {
 
-    private val exerciseViewModel by viewModels<ExerciseViewModel>()
+    private val viewModel: ExerciseViewModel by viewModels()
     private var _binding: FragmentExerciseBinding? = null
     private val binding get() = _binding!!
+    private lateinit var adapter: ExerciseAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,25 +45,19 @@ class ExerciseFragment : Fragment() {
     }
 
     private fun navigation() {
-        binding.ibFooting.setOnClickListener {
-            findNavController().navigate(
-                ExerciseFragmentDirections.actionExerciseFragmentToFormFragment("Footing")
-            )
+
+        adapter = ExerciseAdapter()
+        binding.rvExercises.layoutManager = GridLayoutManager(context, 2)
+        binding.rvExercises.adapter = adapter
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.exercise.observe(viewLifecycleOwner) {
+                    adapter.updateList(it)
+                }
+            }
         }
-        binding.ibGym.setOnClickListener {
-            findNavController().navigate(
-                ExerciseFragmentDirections.actionExerciseFragmentToFormFragment("Gym")
-            )
-        }
-        binding.ibWeight.setOnClickListener {
-            findNavController().navigate(
-                ExerciseFragmentDirections.actionExerciseFragmentToFormFragment("Weight")
-            )
-        }
-        binding.ibBicycle.setOnClickListener {
-            findNavController().navigate(
-                ExerciseFragmentDirections.actionExerciseFragmentToFormFragment("Bicycle")
-            )
-        }
+
+
     }
 }

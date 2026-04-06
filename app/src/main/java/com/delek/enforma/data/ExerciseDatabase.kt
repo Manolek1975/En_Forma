@@ -8,6 +8,6 @@ import com.delek.enforma.data.entity.ExerciseEntity
 @Database(entities = [ExerciseEntity::class], version = 1)
 abstract class ExerciseDatabase: RoomDatabase() {
 
-    abstract fun exerciseDao(): ExerciseDao
+    abstract fun getExerciseDao(): ExerciseDao
 
 }
