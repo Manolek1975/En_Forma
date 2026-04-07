@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/primary"
-        android:padding="48dp"
+        android:padding="24dp"
         android:src="@drawable/arrow_back"
         android:contentDescription="@string/back"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,6 +45,19 @@
         app:layout_constraintTop_toBottomOf="@id/iv_exercise"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextClock
+        android:id="@+id/textClock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:format12Hour="hh:mm:ss a"
+        android:format24Hour="hh:mm:ss"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/bt_start"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bt_end"

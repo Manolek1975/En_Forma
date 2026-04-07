@@ -18,7 +18,6 @@ class FormViewModel @Inject constructor(private val repository: ExerciseReposito
         viewModelScope.launch {
             exercise.value = repository.getExerciseById(id)
         }
-
     }
 
 }

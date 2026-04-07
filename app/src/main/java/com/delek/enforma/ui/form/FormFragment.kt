@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextClock
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -41,7 +42,7 @@ class FormFragment : Fragment() {
     }
 
     private fun setUI() {
-        var startTime: LocalDateTime? = null
+        val startTime: LocalDateTime? = null
 
         viewModel.getExerciseById(args.type)
         viewModel.exercise.observe(viewLifecycleOwner){
@@ -53,13 +54,7 @@ class FormFragment : Fragment() {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
         binding.btStart.setOnClickListener {
-            startTime = LocalDateTime.now()
-            val hora = startTime.format(DateTimeFormatter.ofPattern("HH:mm"))
-            binding.btStart.backgroundTintList = requireContext().getColorStateList(R.color.primary)
-            binding.btStart.setTextColor(Color.BLACK)
-            binding.btStart.text = hora.toString()
-            binding.btStart.textSize = 36F
-            binding.btEnd.visibility = View.VISIBLE
+            initTime()
         }
         binding.btEnd.setOnClickListener {
             val endTime = LocalDateTime.now()
@@ -72,9 +67,22 @@ class FormFragment : Fragment() {
                 val duration = Duration.between(start, endTime)
                 val minutes = duration.toMinutes()
                 binding.tvTotal.text =
-                    getString(R.string.message_duration, args.type, minutes)
+                    getString(R.string.message_duration, minutes)
             }
         }
+    }
+
+    fun initTime() {
+        val textClock = TextClock(context)
+        binding.textClock.visibility = View.VISIBLE
+        binding.textClock.text = textClock.text
+        binding.btStart.backgroundTintList = requireContext().getColorStateList(R.color.primary)
+        binding.btStart.setTextColor(Color.BLACK)
+        binding.btEnd.visibility = View.VISIBLE
+/*        viewModel.showTime()
+        viewModel.time.observe(viewLifecycleOwner) {
+            binding.textClock.text = textClock.text
+        }*/
     }
 
     private fun hideMenu() {

@@ -12,7 +12,7 @@
     <string name="back">Back</string>
     <string name="start">Inicio</string>
     <string name="end">Final</string>
-    <string name="message_duration">Has practicado %1$s durante %2$d minutos</string>
+    <string name="message_duration">Has practicado durante %1$d minutos</string>
 
 
 </resources>
