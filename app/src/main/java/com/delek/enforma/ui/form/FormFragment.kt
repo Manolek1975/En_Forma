@@ -1,6 +1,5 @@
 package com.delek.enforma.ui.form
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +13,6 @@ import com.delek.enforma.databinding.FragmentFormBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.reflect.Field
-import java.time.Duration
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -42,8 +40,6 @@ class FormFragment : Fragment() {
     }
 
     private fun setUI() {
-        val startTime: LocalDateTime? = null
-
         viewModel.getExerciseById(args.type)
         viewModel.exercise.observe(viewLifecycleOwner){
             val id = getResId(it.image, R.drawable::class.java)
@@ -54,36 +50,42 @@ class FormFragment : Fragment() {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
         binding.btStart.setOnClickListener {
-            initTime()
+            initExercise()
         }
         binding.btEnd.setOnClickListener {
-            val endTime = LocalDateTime.now()
-            val hora = endTime.format(DateTimeFormatter.ofPattern("HH:mm"))
-            binding.btEnd.backgroundTintList = requireContext().getColorStateList(R.color.primary)
-            binding.btEnd.setTextColor(Color.BLACK)
-            binding.btEnd.text = hora.toString()
-            binding.btEnd.textSize = 36F
-            startTime?.let { start ->
-                val duration = Duration.between(start, endTime)
-                val minutes = duration.toMinutes()
-                binding.tvTotal.text =
-                    getString(R.string.message_duration, minutes)
-            }
+            endExercise()
         }
     }
 
-    fun initTime() {
+    fun initExercise() {
         val textClock = TextClock(context)
+        val startTime = LocalDateTime.now()
+        val hora = startTime.format(DateTimeFormatter.ofPattern("HH:mm"))
+        binding.tvInit.text = hora
         binding.textClock.visibility = View.VISIBLE
         binding.textClock.text = textClock.text
-        binding.btStart.backgroundTintList = requireContext().getColorStateList(R.color.primary)
-        binding.btStart.setTextColor(Color.BLACK)
+        binding.btStart.visibility = View.GONE
         binding.btEnd.visibility = View.VISIBLE
-/*        viewModel.showTime()
-        viewModel.time.observe(viewLifecycleOwner) {
-            binding.textClock.text = textClock.text
+        //TODO Guardar en la base de datos
+    }
+
+    fun endExercise() {
+        val endTime = LocalDateTime.now()
+        val hora = endTime.format(DateTimeFormatter.ofPattern("HH:mm"))
+        binding.tvEnd.text = hora
+        binding.textClock.visibility = View.GONE
+        binding.btStart.visibility = View.GONE
+        binding.btEnd.visibility = View.GONE
+        //TODO Guardar en la base de datos
+        //TODO Calcular Total
+/*        startTime?.let { start ->
+            val duration = Duration.between(start, endTime)
+            val minutes = duration.toMinutes()
+            binding.tvTotal.text =
+                getString(R.string.message_duration, minutes)
         }*/
     }
+
 
     private fun hideMenu() {
         val view = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav_view)
