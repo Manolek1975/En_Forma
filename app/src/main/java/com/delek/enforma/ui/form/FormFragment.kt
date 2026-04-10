@@ -9,11 +9,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.delek.enforma.R
+import com.delek.enforma.data.entity.ResumeEntity
 import com.delek.enforma.databinding.FragmentFormBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.reflect.Field
+import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
@@ -62,21 +65,25 @@ class FormFragment : Fragment() {
         val startTime = LocalDateTime.now()
         val hora = startTime.format(DateTimeFormatter.ofPattern("HH:mm"))
         binding.tvInit.text = hora
-        binding.textClock.visibility = View.VISIBLE
         binding.textClock.text = textClock.text
-        binding.btStart.visibility = View.GONE
+        binding.textClock.visibility = View.VISIBLE
         binding.btEnd.visibility = View.VISIBLE
+        binding.btStart.visibility = View.GONE
         //TODO Guardar en la base de datos
     }
 
     fun endExercise() {
         val endTime = LocalDateTime.now()
+        val date = LocalDate.now().toString()
+        val time =  LocalTime.now().toString()
         val hora = endTime.format(DateTimeFormatter.ofPattern("HH:mm"))
         binding.tvEnd.text = hora
         binding.textClock.visibility = View.GONE
         binding.btStart.visibility = View.GONE
         binding.btEnd.visibility = View.GONE
         //TODO Guardar en la base de datos
+        val resume = ResumeEntity(0, args.type, date, time, time, 0)
+        viewModel.insertResume(resume)
         //TODO Calcular Total
 /*        startTime?.let { start ->
             val duration = Duration.between(start, endTime)

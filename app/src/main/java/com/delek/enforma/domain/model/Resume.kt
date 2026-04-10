@@ -1,12 +1,14 @@
 package com.delek.enforma.domain.model
 
-import java.sql.Date
-import java.sql.Time
+import com.delek.enforma.data.entity.ResumeEntity
 
-class Resume(
+data class Resume(
     val id: Int,
-    val date: Date,
-    val start: Time,
-    val end: Time,
-    val duration: Time
+    val exercise: Int,
+    val date: String,
+    val start: String,
+    val end: String,
+    val duration: Int
 )
+
+fun ResumeEntity.toDomain() = Resume(id, exercise, date, start, end, duration)

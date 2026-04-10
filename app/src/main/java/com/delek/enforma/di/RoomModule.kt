@@ -25,4 +25,9 @@ object RoomModule {
     @Provides
     fun provideExerciseDao(db: ExerciseDatabase) = db.getExerciseDao()
 
+    @Singleton
+    @Provides
+    fun provideResumeDao(db: ExerciseDatabase) = db.getResumeDao()
+
+
 }
