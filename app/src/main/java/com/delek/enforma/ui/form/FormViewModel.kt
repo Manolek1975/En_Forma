@@ -7,6 +7,7 @@ import com.delek.enforma.data.entity.ResumeEntity
 import com.delek.enforma.data.repository.ExerciseRepository
 import com.delek.enforma.data.repository.ResumeRepository
 import com.delek.enforma.domain.model.Exercise
+import com.delek.enforma.domain.model.Resume
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -15,9 +16,11 @@ import javax.inject.Inject
 class FormViewModel @Inject constructor(
     private val repository: ExerciseRepository,
     private val resumeRepository: ResumeRepository
-    ) : ViewModel(){
+) : ViewModel() {
 
     val exercise = MutableLiveData<Exercise>()
+    val resume = MutableLiveData<Resume>()
+
 
     fun getExerciseById(id: Int) {
         viewModelScope.launch {
@@ -29,6 +32,19 @@ class FormViewModel @Inject constructor(
         viewModelScope.launch {
             resumeRepository.insert(resume)
         }
+    }
+
+    fun getLast() {
+        viewModelScope.launch {
+            resume.value = resumeRepository.getLast()
+        }
+    }
+
+    fun updateLast(endTime: String, duration: Int) {
+        viewModelScope.launch {
+            resumeRepository.update(endTime, duration)
+        }
+
     }
 
 }

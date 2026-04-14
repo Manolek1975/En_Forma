@@ -6,9 +6,9 @@ data class Resume(
     val id: Int,
     val exercise: Int,
     val date: String,
-    val start: String,
-    val end: String,
+    val startTime: String,
+    val endTime: String,
     val duration: Int
 )
 
-fun ResumeEntity.toDomain() = Resume(id, exercise, date, start, end, duration)
+fun ResumeEntity.toDomain() = Resume(id, exercise, date, startTime, endTime, duration)

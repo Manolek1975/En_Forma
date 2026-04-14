@@ -14,6 +14,7 @@ import com.delek.enforma.databinding.FragmentFormBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.reflect.Field
+import java.time.Duration
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -66,33 +67,31 @@ class FormFragment : Fragment() {
         val hora = startTime.format(DateTimeFormatter.ofPattern("HH:mm"))
         binding.tvInit.text = hora
         binding.textClock.text = textClock.text
+        val date = LocalDate.now().toString()
+        val time =  LocalTime.now().toString()
+        val resume = ResumeEntity(0, args.type, date, time, "", 0)
+        viewModel.insertResume(resume)
         binding.textClock.visibility = View.VISIBLE
         binding.btEnd.visibility = View.VISIBLE
         binding.btStart.visibility = View.GONE
-        //TODO Guardar en la base de datos
     }
 
     fun endExercise() {
         val endTime = LocalDateTime.now()
-        val date = LocalDate.now().toString()
-        val time =  LocalTime.now().toString()
+        val time = LocalTime.now().toString()
         val hora = endTime.format(DateTimeFormatter.ofPattern("HH:mm"))
         binding.tvEnd.text = hora
+        viewModel.getLast()
+        viewModel.resume.observe(viewLifecycleOwner) {
+            val start = LocalTime.parse(it.startTime)
+            val duration = Duration.between(start, endTime)
+            val minutes = duration.toMinutes()
+            viewModel.updateLast(time, minutes.toInt())
+        }
         binding.textClock.visibility = View.GONE
         binding.btStart.visibility = View.GONE
         binding.btEnd.visibility = View.GONE
-        //TODO Guardar en la base de datos
-        val resume = ResumeEntity(0, args.type, date, time, time, 0)
-        viewModel.insertResume(resume)
-        //TODO Calcular Total
-/*        startTime?.let { start ->
-            val duration = Duration.between(start, endTime)
-            val minutes = duration.toMinutes()
-            binding.tvTotal.text =
-                getString(R.string.message_duration, minutes)
-        }*/
     }
-
 
     private fun hideMenu() {
         val view = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav_view)

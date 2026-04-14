@@ -9,7 +9,7 @@ data class ResumeEntity(
     val id: Int,
     val exercise: Int,
     val date: String,
-    val start: String,
-    val end: String,
+    val startTime: String,
+    val endTime: String,
     val duration: Int
 )
