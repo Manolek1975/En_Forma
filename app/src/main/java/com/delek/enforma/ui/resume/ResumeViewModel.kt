@@ -14,7 +14,7 @@ class ResumeViewModel @Inject constructor(private val repository: ResumeReposito
 
     val resume = MutableLiveData<List<Resume>>()
 
-    init {
+    fun getAll() {
         viewModelScope.launch {
             resume.value = repository.getAll()
         }

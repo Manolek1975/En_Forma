@@ -38,30 +38,55 @@ class FormFragment : Fragment() {
         return binding.root
     }
 
-    private fun initUI() {
+    fun initUI(){
         hideMenu()
-        setUI()
+        checkActive()
+        initListeners()
     }
 
-    private fun setUI() {
-        viewModel.getExerciseById(args.type)
-        viewModel.exercise.observe(viewLifecycleOwner){
-            val id = getResId(it.image, R.drawable::class.java)
+    private fun checkActive() {
+        viewModel.getLast()
+        viewModel.resume.observe(viewLifecycleOwner) {
+            if (it == null) {
+                binding.btStart.visibility = View.VISIBLE
+                binding.btEnd.visibility = View.GONE
+                showUI(args.type)
+            } else if(!it.active){
+                binding.btStart.visibility = View.VISIBLE
+            binding.btEnd.visibility = View.GONE
+            showUI(args.type)
+        } else {
+                binding.btStart.visibility = View.GONE
+                binding.btEnd.visibility = View.VISIBLE
+                binding.textClock.visibility = View.VISIBLE
+                showUI(it.exercise)
+            }
+        }
+    }
+
+    fun showUI(id: Int){
+        viewModel.getExerciseById(id)
+        viewModel.exercise.observe(viewLifecycleOwner){ ex ->
+            val id = getResId(ex.image, R.drawable::class.java)
             binding.ivExercise.setImageResource(id)
-            binding.tvTitle.text = it.name
+            binding.tvTitle.text = ex.name
         }
-        binding.arrowBack.setOnClickListener {
-            requireActivity().onBackPressedDispatcher.onBackPressed()
-        }
+    }
+
+    private fun initListeners() {
         binding.btStart.setOnClickListener {
             initExercise()
         }
         binding.btEnd.setOnClickListener {
             endExercise()
         }
+        binding.arrowBack.setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
     }
 
     fun initExercise() {
+        var resume = ResumeEntity(0, 0, "", "", "", 0, false)
         val textClock = TextClock(context)
         val startTime = LocalDateTime.now()
         val hora = startTime.format(DateTimeFormatter.ofPattern("HH:mm"))
@@ -69,7 +94,10 @@ class FormFragment : Fragment() {
         binding.textClock.text = textClock.text
         val date = LocalDate.now().toString()
         val time =  LocalTime.now().toString()
-        val resume = ResumeEntity(0, args.type, date, time, "", 0)
+        viewModel.getExerciseById(args.type)
+        viewModel.exercise.observe(viewLifecycleOwner){
+            resume = ResumeEntity(0, it.id, date, time, "", 0, true)
+        }
         viewModel.insertResume(resume)
         binding.textClock.visibility = View.VISIBLE
         binding.btEnd.visibility = View.VISIBLE
@@ -86,11 +114,11 @@ class FormFragment : Fragment() {
             val start = LocalTime.parse(it.startTime)
             val duration = Duration.between(start, endTime)
             val minutes = duration.toMinutes()
-            viewModel.updateLast(time, minutes.toInt())
+            viewModel.updateActive(time, minutes.toInt(), false)
+            binding.textClock.visibility = View.GONE
+            binding.btStart.visibility = View.GONE
+            binding.btEnd.visibility = View.GONE
         }
-        binding.textClock.visibility = View.GONE
-        binding.btStart.visibility = View.GONE
-        binding.btEnd.visibility = View.GONE
     }
 
     private fun hideMenu() {

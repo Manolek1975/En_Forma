@@ -15,7 +15,7 @@
     <string name="message_duration">Has practicado durante %1$d minutos</string>
     <string name="init_exercise">Inicio</string>
     <string name="end_exercise">Final</string>
-    <string name="total">TOTAL</string>
+    <string name="total">%1$d minutes</string>
 
 
 </resources>

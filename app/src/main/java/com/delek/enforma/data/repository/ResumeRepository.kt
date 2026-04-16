@@ -17,12 +17,12 @@ class ResumeRepository @Inject constructor(private val resumeDao: ResumeDao) {
         return response.map { it.toDomain() }
     }
 
-    suspend fun getLast(): Resume {
-        val response: ResumeEntity = resumeDao.getLast()
-        return response.toDomain()
+    suspend fun getLast(): Resume? {
+        val response: ResumeEntity? = resumeDao.getLast()
+        return response?.toDomain()
     }
 
-    suspend fun update(endTime: String, duration: Int) {
-        resumeDao.update(endTime, duration)
+    suspend fun update(endTime: String, duration: Int, active: Boolean) {
+        resumeDao.update(endTime, duration, active)
     }
 }

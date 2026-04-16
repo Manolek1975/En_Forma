@@ -3,14 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:layout_margin="1dp"
+    android:background="@drawable/round_layout">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:paddingEnd="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="18-04-26" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="end"
+        app:layout_constraintStart_toEndOf="@id/item_date"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="EXERCISE" />
 
@@ -18,8 +31,9 @@
         android:id="@+id/item_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingEnd="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_name"
+        app:layout_constraintTop_toBottomOf="@id/item_date"
         tools:text="INICIO" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -27,16 +41,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@id/item_start"
-        app:layout_constraintTop_toBottomOf="@id/item_name"
+        app:layout_constraintTop_toBottomOf="@id/item_date"
         tools:text="FINAL" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/item_total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/item_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/item_end"
-        app:layout_constraintTop_toBottomOf="@id/item_name"
         tools:text="TOTAL" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

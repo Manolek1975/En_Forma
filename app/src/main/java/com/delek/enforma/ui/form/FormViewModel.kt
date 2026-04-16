@@ -40,9 +40,9 @@ class FormViewModel @Inject constructor(
         }
     }
 
-    fun updateLast(endTime: String, duration: Int) {
+    fun updateActive(endTime: String, duration: Int, active: Boolean) {
         viewModelScope.launch {
-            resumeRepository.update(endTime, duration)
+            resumeRepository.update(endTime, duration, active)
         }
 
     }

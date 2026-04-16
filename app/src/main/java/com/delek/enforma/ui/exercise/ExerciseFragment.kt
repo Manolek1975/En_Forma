@@ -53,7 +53,6 @@ class ExerciseFragment : Fragment() {
         })
         binding.rvExercises.layoutManager = GridLayoutManager(context, 2)
         binding.rvExercises.adapter = adapter
-
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.exercise.observe(viewLifecycleOwner) {
@@ -61,7 +60,6 @@ class ExerciseFragment : Fragment() {
                 }
             }
         }
-
-
     }
+
 }
