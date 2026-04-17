@@ -16,7 +16,10 @@ interface ResumeDao {
     suspend fun getAll(): List<ResumeEntity>
 
     @Query("SELECT * FROM resume ORDER BY id DESC LIMIT 1")
-    suspend fun getLast(): ResumeEntity?
+    suspend fun getLast(): ResumeEntity
+
+    @Query("SELECT * FROM resume WHERE active = 1")
+    suspend fun getActive(): ResumeEntity?
 
     @Query("UPDATE resume SET endTime = :endTime, duration = :duration, active = :active " +
             "WHERE id = (SELECT id FROM resume ORDER BY id DESC LIMIT 1)")

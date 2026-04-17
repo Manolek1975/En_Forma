@@ -14,17 +14,19 @@ class ResumeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val binding = ItemResumeBinding.bind(view)
 
     fun render(resume: Resume) {
-        binding.itemName.text = resume.exercise.toString()
+        binding.itemName.text = resume.name
         val date = LocalDate.parse(resume.date)
         val dateExercise = date.format(DateTimeFormatter.ofPattern("dd-MM-yy"))
         binding.itemDate.text = dateExercise
         val startTime = LocalTime.parse(resume.startTime)
         val init = startTime.format(DateTimeFormatter.ofPattern("HH:mm"))
         binding.itemStart.text = init
-        val endTime = LocalTime.parse(resume.endTime)
-        val end = endTime.format(DateTimeFormatter.ofPattern("HH:mm"))
-        binding.itemEnd.text = end
-        binding.itemTotal.text = itemView.context.getString(R.string.total, resume.duration)
+        if (resume.endTime != "") {
+            val endTime = LocalTime.parse(resume.endTime)
+            val end = endTime.format(DateTimeFormatter.ofPattern("HH:mm"))
+            binding.itemEnd.text = end
+            binding.itemTotal.text = itemView.context.getString(R.string.total, resume.duration)
+        }
     }
 
 }

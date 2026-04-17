@@ -7,7 +7,8 @@ import androidx.room.PrimaryKey
 data class ResumeEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val exercise: Int,
+    val exerciseId: Int,
+    val name: String,
     val date: String,
     val startTime: String,
     val endTime: String,

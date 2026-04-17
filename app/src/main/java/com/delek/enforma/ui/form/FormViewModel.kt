@@ -20,6 +20,7 @@ class FormViewModel @Inject constructor(
 
     val exercise = MutableLiveData<Exercise>()
     val resume = MutableLiveData<Resume>()
+    val active = MutableLiveData<Resume>()
 
 
     fun getExerciseById(id: Int) {
@@ -37,6 +38,12 @@ class FormViewModel @Inject constructor(
     fun getLast() {
         viewModelScope.launch {
             resume.value = resumeRepository.getLast()
+        }
+    }
+
+    fun getActive() {
+        viewModelScope.launch {
+            active.value = resumeRepository.getActive()
         }
     }
 

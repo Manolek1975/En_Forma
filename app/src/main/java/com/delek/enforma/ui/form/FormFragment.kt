@@ -38,35 +38,33 @@ class FormFragment : Fragment() {
         return binding.root
     }
 
-    fun initUI(){
+    fun initUI() {
         hideMenu()
         checkActive()
         initListeners()
     }
 
     private fun checkActive() {
-        viewModel.getLast()
-        viewModel.resume.observe(viewLifecycleOwner) {
-            if (it == null) {
+        viewModel.getActive()
+        viewModel.active.observe(viewLifecycleOwner) {
+            if (it == null || !it.active) {
                 binding.btStart.visibility = View.VISIBLE
                 binding.btEnd.visibility = View.GONE
                 showUI(args.type)
-            } else if(!it.active){
-                binding.btStart.visibility = View.VISIBLE
-            binding.btEnd.visibility = View.GONE
-            showUI(args.type)
-        } else {
+            } else {
+                val hora = it.startTime.format(DateTimeFormatter.ofPattern("HH:mm"))
+                binding.tvInit.text = hora
                 binding.btStart.visibility = View.GONE
                 binding.btEnd.visibility = View.VISIBLE
                 binding.textClock.visibility = View.VISIBLE
-                showUI(it.exercise)
+                showUI(it.exerciseId)
             }
         }
     }
 
-    fun showUI(id: Int){
+    fun showUI(id: Int) {
         viewModel.getExerciseById(id)
-        viewModel.exercise.observe(viewLifecycleOwner){ ex ->
+        viewModel.exercise.observe(viewLifecycleOwner) { ex ->
             val id = getResId(ex.image, R.drawable::class.java)
             binding.ivExercise.setImageResource(id)
             binding.tvTitle.text = ex.name
@@ -86,17 +84,19 @@ class FormFragment : Fragment() {
     }
 
     fun initExercise() {
-        var resume = ResumeEntity(0, 0, "", "", "", 0, false)
+        var resume = ResumeEntity(0, 0, "", "",
+            "", "", 0, false)
         val textClock = TextClock(context)
         val startTime = LocalDateTime.now()
         val hora = startTime.format(DateTimeFormatter.ofPattern("HH:mm"))
         binding.tvInit.text = hora
         binding.textClock.text = textClock.text
         val date = LocalDate.now().toString()
-        val time =  LocalTime.now().toString()
+        val time = LocalTime.now().toString()
         viewModel.getExerciseById(args.type)
-        viewModel.exercise.observe(viewLifecycleOwner){
-            resume = ResumeEntity(0, it.id, date, time, "", 0, true)
+        viewModel.exercise.observe(viewLifecycleOwner) {
+            resume = ResumeEntity(0, it.id, it.name, date,
+                time, "", 0, true)
         }
         viewModel.insertResume(resume)
         binding.textClock.visibility = View.VISIBLE
